@@ -1,5 +1,6 @@
 package sql
 
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
@@ -17,6 +18,7 @@ object Categories : Table() {
     override val primaryKey = PrimaryKey(categoryId, name = "PK_categoryId")
 }
 
+@Serializable
 data class Category(val categoryId: Int, val name: String) {
     companion object {
         fun transformRow(resultRow: ResultRow) = Category(
@@ -36,6 +38,7 @@ object Subcategories : Table() {
     }
 }
 
+@Serializable
 data class Subcategory(val subcategoryId: Int, val categoryId: Int, val name: String) {
     companion object {
         fun transformRow(resultRow: ResultRow) = Subcategory(
@@ -55,6 +58,7 @@ object Transactions : Table() {
     override val primaryKey = PrimaryKey(transactionId, name = "PK_transactionId")
 }
 
+@Serializable
 data class Transaction(val transactionId: Int, val date: LocalDate, val subcategoryId: Int, val value: Double, val isDebitTransaction: Boolean) {
     companion object {
         fun transformRow(resultRow: ResultRow) = Transaction(

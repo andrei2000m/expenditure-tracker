@@ -8,6 +8,8 @@ plugins {
 group = "me.andrei2000m"
 version = "1.0-SNAPSHOT"
 
+val ktorVersion = "2.2.1"
+
 repositories {
     jcenter()
     mavenCentral()
@@ -16,8 +18,11 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("io.ktor:ktor-server-netty:2.1.3")
-    implementation("io.ktor:ktor-server-html-builder-jvm:2.1.3")
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation("io.ktor:ktor-server-html-builder-jvm:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.0")
 
     implementation("org.jetbrains.exposed:exposed-core:0.40.1")
@@ -29,6 +34,7 @@ dependencies {
 
     implementation("io.insert-koin:koin-core:3.2.2")
 
+    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.5.4")
     testImplementation("io.mockk:mockk:1.13.3")
