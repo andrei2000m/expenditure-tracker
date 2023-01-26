@@ -1,6 +1,12 @@
 package sql
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
@@ -59,7 +65,7 @@ object Transactions : Table() {
 }
 
 @Serializable
-data class Transaction(val transactionId: Int, val date: LocalDate, val subcategoryId: Int, val value: Double, val isDebitTransaction: Boolean) {
+data class Transaction(val transactionId: Int, @Serializable(DateSerializer::class) val date: LocalDate, val subcategoryId: Int, val value: Double, val isDebitTransaction: Boolean) {
     companion object {
         fun transformRow(resultRow: ResultRow) = Transaction(
             transactionId = resultRow[Transactions.transactionId],
@@ -69,4 +75,13 @@ data class Transaction(val transactionId: Int, val date: LocalDate, val subcateg
             isDebitTransaction = resultRow[Transactions.isDebitTransaction]
         )
     }
+}
+
+object DateSerializer : KSerializer<LocalDate> {
+    override val descriptor: SerialDescriptor
+        get() = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): LocalDate = LocalDate.parse(decoder.decodeString())
+
+    override fun serialize(encoder: Encoder, value: LocalDate) = encoder.encodeString(value.toString())
 }
