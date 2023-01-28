@@ -1,3 +1,5 @@
+package routes
+
 import com.zaxxer.hikari.HikariDataSource
 import config.configureRouting
 import config.configureSerialization
@@ -28,13 +30,11 @@ import sql.Categories
 import sql.Category
 import sql.Subcategories
 import sql.Transactions
-import sql.calculateTotalValuesPerCategory
 import sql.configure
 import sql.getAllCategories
-import sql.insertCategory
 import java.time.LocalDate
 
-internal class ServerTest {
+internal class CategoryTest {
 
     private lateinit var dataSource: HikariDataSource
 

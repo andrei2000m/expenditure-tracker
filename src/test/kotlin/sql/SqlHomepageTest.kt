@@ -50,9 +50,9 @@ internal class SqlHomepageTest {
         val category1 = Category(1, "name1")
         val category2 = Category(2, "name2")
 
-        val listaCategorii: List<Category> = getAllCategories()
+        val categoryList: List<Category> = getAllCategories()
 
-        listaCategorii shouldContainExactly listOf(category1, category2)
+        categoryList shouldContainExactly listOf(category1, category2)
     }
 
     @Test

@@ -1,4 +1,4 @@
-package config.routes
+package routes
 
 import io.ktor.server.application.call
 import io.ktor.server.request.receive
