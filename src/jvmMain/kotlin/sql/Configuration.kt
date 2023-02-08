@@ -11,7 +11,6 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.date
-import org.jetbrains.exposed.sql.javatime.dateLiteral
 import java.time.LocalDate
 
 val databaseConnection = Database.connect("jdbc:sqlite:cheltuieli.db", driver = "org.sqlite.JDBC", setupConnection = { connection ->
