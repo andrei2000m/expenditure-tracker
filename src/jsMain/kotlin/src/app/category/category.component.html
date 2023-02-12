@@ -1,0 +1,11 @@
+<form #registerForm="ngForm" (ngSubmit)="onFormSubmit(registerForm)">
+  <mat-form-field appearance="fill">
+    <mat-label>Category Name</mat-label>
+    <input type="text" class="form-control" id="categoryName" required [(ngModel)]="categoryName" name="categoryName">
+    {{registerForm.value.categoryName}}
+  </mat-form-field>
+
+  <div class="button-row">
+    <button type="submit" mat-flat-button color="primary">Submit</button>
+  </div>
+</form>

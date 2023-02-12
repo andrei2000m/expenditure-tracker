@@ -15,7 +15,7 @@ version = "1.0-SNAPSHOT"
 val ktorVersion = "2.2.1"
 val logbackVersion = "1.4.5"
 val nodeJsVersion = "16.14.0"
-val angularCliVersion = "8.3.2"
+val angularCliVersion = "15.1.3"
 
 repositories {
     jcenter()
@@ -56,8 +56,6 @@ kotlin {
                 implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
                 implementation("org.xerial:sqlite-jdbc:3.40.0.0")
                 implementation("com.zaxxer:HikariCP:5.0.1")
-
-                implementation("io.insert-koin:koin-core:3.2.2")
 
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
             }

@@ -20,6 +20,7 @@ fun Route.categoryRouting() {
             call.respond(calculateTotalValuesPerCategory())
         }
         post {
+            //TODO: Add response in case of ok/error (duplicate name)
             val categoryName = call.receive<String>()
             insertCategory(categoryName)
         }

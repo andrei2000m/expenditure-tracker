@@ -24,5 +24,7 @@ fun calculateTotalValuesPerCategory(): Map<String, Double> {
 }
 
 fun getAllCategories(): List<Category> {
-    return Categories.selectAll().map { Category.transformRow(it) }
+    return transaction {
+        Categories.selectAll().map { Category.transformRow(it) }
+    }
 }
