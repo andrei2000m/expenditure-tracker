@@ -26,7 +26,7 @@ fun Route.categoryRouting() {
             val categoryName = call.receive<String>()
             try {
                 insertCategory(categoryName)
-                call.respondText("OK", status = HttpStatusCode.OK)
+                call.respond(HttpStatusCode.Created)
             } catch (e: ExposedSQLException) {
                 call.respondText("Category $categoryName already exists", status = HttpStatusCode.BadRequest)
             }
