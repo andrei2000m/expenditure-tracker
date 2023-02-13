@@ -1,12 +1,15 @@
 package routes
 
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 import sql.calculateTotalValuesPerCategory
 import sql.getAllCategories
 import sql.insertCategory
@@ -20,9 +23,13 @@ fun Route.categoryRouting() {
             call.respond(calculateTotalValuesPerCategory())
         }
         post {
-            //TODO: Add response in case of ok/error (duplicate name)
             val categoryName = call.receive<String>()
-            insertCategory(categoryName)
+            try {
+                insertCategory(categoryName)
+                call.respondText("OK", status = HttpStatusCode.OK)
+            } catch (e: ExposedSQLException) {
+                call.respondText("Category $categoryName already exists", status = HttpStatusCode.BadRequest)
+            }
         }
     }
 }

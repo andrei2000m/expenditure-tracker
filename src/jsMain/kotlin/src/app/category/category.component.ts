@@ -14,6 +14,7 @@ export class CategoryInsertComponent {
   }
 
   categoryName = ""
+  errorMessage = ""
 
   onFormSubmit(form: NgForm) {
     var data = form.value;
@@ -21,8 +22,11 @@ export class CategoryInsertComponent {
     this.http.post("/category", payload)
       .subscribe(response => {
         console.log(response);
+        this.errorMessage = ""
+//         TODO: This still shows even for 200
       }, (err: HttpErrorResponse) => {
         console.log(err)
+        this.errorMessage = err.error
       });
   }
 }
