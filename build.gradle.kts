@@ -3,8 +3,10 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "1.8.10"
+    kotlin("multiplatform") version "1.8.10" apply false
     kotlin("plugin.serialization") version "1.8.10"
+    id("com.android.application") version "7.3.0"
+    kotlin("android") version "1.5.31" apply false
     id("com.github.node-gradle.node") version "3.5.1"
     application
 }
@@ -18,12 +20,14 @@ val nodeJsVersion = "16.14.0"
 val angularCliVersion = "15.1.3"
 
 repositories {
-    jcenter()
+    google()
+    gradlePluginPortal()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
 kotlin {
+    android()
     jvm {
         withJava()
     }
@@ -33,6 +37,20 @@ kotlin {
         }
     }
     sourceSets {
+        /*val androidMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
+                implementation("com.android.support:appcompat-v7:28.0.0")
+                implementation("com.android.support.constraint:constraint-layout:2.0.1")
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation("junit:junit:4.+")
+                implementation("com.android.support.test:runner:1.0.2")
+                implementation("com.android.support.test.espresso:espresso-core:3.0.2")
+            }
+        }*/
         val commonMain by getting
         val commonTest by getting {
             dependencies {
@@ -79,6 +97,17 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "13"
+}
+
+android {
+    compileSdk = 31
+    defaultConfig {
+        applicationId = "android.main.androidApp"
+        minSdk = 21
+        targetSdk = 31
+        versionCode = 1
+        versionName = "1.0"
+    }
 }
 
 node {
