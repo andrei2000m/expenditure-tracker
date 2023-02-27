@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgForm } from "@angular/forms";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'category-form',

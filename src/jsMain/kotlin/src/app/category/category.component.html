@@ -1,12 +1,13 @@
+<!-- TODO: See how to use Angular Material theme -->
 <form #registerForm="ngForm" (ngSubmit)="onFormSubmit(registerForm)">
   <h1 style="color:red">{{errorMessage}}</h1>
 
   <mat-form-field appearance="fill">
     <mat-label>Category Name</mat-label>
-    <input type="text" class="form-control" id="categoryName" required [(ngModel)]="categoryName" name="categoryName">
+    <input type="text" matInput class="form-control" id="categoryName" required [(ngModel)]="categoryName" name="categoryName" placeholder="Category Name">
   </mat-form-field>
 
   <div class="button-row">
-    <button type="submit" mat-flat-button color="primary">Submit</button>
+    <button mat-flat-button type="submit" color="primary" style="background-color:#A020F0">Submit</button>
   </div>
 </form>
