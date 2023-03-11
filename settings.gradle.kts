@@ -1,12 +1,14 @@
 pluginManagement {
     repositories {
-        mavenCentral()
-        gradlePluginPortal()
         google()
+        gradlePluginPortal()
+        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
 rootProject.name = "expenditure-tracker"
 
-include(":src:androidMain")
-include(":src:androidTest")
+include("common")
+include("web")
+include("android")
