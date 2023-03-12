@@ -5,13 +5,11 @@ import config.configureRouting
 import config.configureSerialization
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
-import io.ktor.server.testing.testApplication
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.testing.*
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
@@ -21,12 +19,10 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import sql.Categories
 import sql.Subcategories
-import sql.Transaction
-import sql.Transactions
+import sql.Subcategory
 import sql.configure
-import java.time.LocalDate
 
-internal class TransactionTest {
+internal class SubcategoryTest {
 
     private lateinit var dataSource: HikariDataSource
 
@@ -36,7 +32,7 @@ internal class TransactionTest {
     }
 
     @Test
-    fun canInsertTransaction() = testApplication {
+    fun canInsertSubCategory() = testApplication {
         application {
             configureRouting()
             configureSerialization()
@@ -44,17 +40,11 @@ internal class TransactionTest {
 
         val categoryName = "category"
         val subcategoryName = "subcategory"
-        val date = LocalDate.of(2022, 12, 10)
-        val value = 1.25
 
         transaction {
-            SchemaUtils.create(Categories, Subcategories, Transactions)
+            SchemaUtils.create(Categories, Subcategories)
             Categories.insert {
                 it[name] = categoryName
-            }
-            Subcategories.insert {
-                it[name] = subcategoryName
-                it[categoryId] = 1
             }
         }
 
@@ -64,15 +54,15 @@ internal class TransactionTest {
             }
         }
 
-        val expected = Transaction(transactionId = 1, date = date, subcategoryId = 1, value = value, isDebitTransaction = true)
+        val expected = Subcategory(subcategoryId = 1, name = subcategoryName, categoryId = 1)
 
-        client.post("/transaction") {
+        client.post("/subcategory") {
             contentType(ContentType.Application.Json)
-            setBody(TransactionInput(subcategoryName, date, value, true))
+            setBody(Pair(categoryName, subcategoryName))
         }
 
         val actual = transaction {
-            Transactions.selectAll().toList().map { Transaction.transformRow(it) }
+            Subcategories.selectAll().toList().map { Subcategory.transformRow(it) }
         }
 
         actual shouldHaveSize 1

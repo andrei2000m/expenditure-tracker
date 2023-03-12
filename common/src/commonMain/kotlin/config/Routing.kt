@@ -1,9 +1,8 @@
 package config
 
-import io.ktor.server.application.Application
-import io.ktor.server.http.content.angular
-import io.ktor.server.http.content.singlePageApplication
-import io.ktor.server.routing.routing
+import io.ktor.server.application.*
+import io.ktor.server.http.content.*
+import io.ktor.server.routing.*
 import routes.categoryRouting
 import routes.subcategoryRouting
 import routes.transactionRouting

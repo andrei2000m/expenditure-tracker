@@ -15,14 +15,15 @@ dependencies {
     implementation(project(":common"))
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.compose.material:material:1.3.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdk = 33
     defaultConfig {
         applicationId = "android.main"
-        minSdkVersion(24)
-        targetSdkVersion(31)
+        minSdk = 24
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
     }
@@ -34,5 +35,12 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    packagingOptions {
+        resources.pickFirsts.add("META-INF/INDEX.LIST")
+        resources.pickFirsts.add("META-INF/io.netty.versions.properties")
     }
 }
