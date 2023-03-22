@@ -2,6 +2,7 @@ package android.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import main
 import org.example.android.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,5 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        main(Array(0) {""})
     }
 }

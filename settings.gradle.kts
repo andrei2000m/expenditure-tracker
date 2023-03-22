@@ -10,6 +10,7 @@ pluginManagement {
 
 rootProject.name = "expenditure-tracker"
 
-include("common")
-include("web")
-include("android")
+//include("common")
+//include("web")
+//include("android")
+include(":expendituretracker")
