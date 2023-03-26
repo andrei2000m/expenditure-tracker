@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId = "com.andrei2000m.expendituretracker"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -42,6 +42,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
+    packagingOptions {
+        resources.excludes.add("META-INF/**")
+        resources.excludes.add("**/attach_hotspot_windows.dll")
+    }
 }
 
 dependencies {
@@ -55,8 +64,11 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("io.kotest:kotest-runner-junit5:5.5.5")
+    androidTestImplementation("io.kotest:kotest-assertions-core:5.5.5")
 }

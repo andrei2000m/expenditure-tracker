@@ -2,15 +2,26 @@ package com.andrei2000m.expendituretracker.sql
 
 import androidx.room.Dao
 import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
+import androidx.room.Query
 
-@Entity
+@Entity(
+    tableName = "categories",
+    indices = [Index(value = ["name"], unique = true)]
+)
 data class Category(
-    @PrimaryKey val categoryId: Int,
+    @PrimaryKey(autoGenerate = true) val categoryId: Int = 0,
     val name: String
 )
 
 @Dao
 interface CategoryDao {
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertCategory(category: Category): Long
 
+    @Query("SELECT * FROM categories")
+    fun getAll(): List<Category>
 }
