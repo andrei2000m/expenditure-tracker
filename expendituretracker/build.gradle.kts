@@ -2,6 +2,8 @@ plugins {
     id("com.android.application") version "7.4.1"
     id("org.jetbrains.kotlin.android") version "1.5.31"
     id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+    id("com.google.dagger.hilt.android") version "2.44"
+    kotlin("kapt") version "1.8.10"
 }
 
 repositories {
@@ -23,7 +25,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.andrei2000m.expendituretracker.TestRunner"
     }
 
     buildTypes {
@@ -51,6 +53,9 @@ android {
         resources.excludes.add("META-INF/**")
         resources.excludes.add("**/attach_hotspot_windows.dll")
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -60,6 +65,11 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
@@ -71,4 +81,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("io.kotest:kotest-runner-junit5:5.5.5")
     androidTestImplementation("io.kotest:kotest-assertions-core:5.5.5")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
 }

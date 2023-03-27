@@ -1,16 +1,9 @@
-package com.andrei2000m.expendituretracker
+package com.andrei2000m.expendituretracker.sql
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.andrei2000m.expendituretracker.sql.Category
-import com.andrei2000m.expendituretracker.sql.CategoryDao
-import com.andrei2000m.expendituretracker.sql.ExpenditureDb
-import com.andrei2000m.expendituretracker.sql.Subcategory
-import com.andrei2000m.expendituretracker.sql.SubcategoryDao
-import com.andrei2000m.expendituretracker.sql.Transaction
-import com.andrei2000m.expendituretracker.sql.TransactionDao
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.equality.shouldBeEqualToIgnoringFields
 import io.kotest.matchers.maps.shouldContainExactly
