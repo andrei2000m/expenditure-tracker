@@ -1,5 +1,6 @@
 package com.andrei2000m.expendituretracker.sql
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Entity
 import androidx.room.Index
@@ -23,5 +24,5 @@ interface CategoryDao {
     fun insertCategory(category: Category): Long
 
     @Query("SELECT * FROM categories")
-    fun getAll(): List<Category>
+    fun getAll(): LiveData<List<Category>>
 }

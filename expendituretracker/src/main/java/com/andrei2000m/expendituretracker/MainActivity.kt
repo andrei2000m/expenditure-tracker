@@ -1,6 +1,7 @@
 package com.andrei2000m.expendituretracker
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.andrei2000m.expendituretracker.databinding.ActivityMainBinding
@@ -19,9 +20,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val categoryModel = CategoryViewModel(db)
+        val categoryModel = CategoryViewModel(db, application)
 
         binding.lifecycleOwner = this
         binding.categoryViewModel = categoryModel
+
+        categoryModel.toastMessage.observe(this) {
+            Toast.makeText(
+                application.applicationContext,
+                it,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
