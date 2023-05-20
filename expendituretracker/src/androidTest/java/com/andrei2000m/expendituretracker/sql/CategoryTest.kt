@@ -30,7 +30,7 @@ class CategoryTest {
 
         categoryDao.insertCategory(expected)
 
-        val result = categoryDao.getAll().value!!
+        val result = categoryDao.getAll()
 
         result shouldHaveSize 1
         result.first().shouldBeEqualToIgnoringFields(expected, Category::categoryId)

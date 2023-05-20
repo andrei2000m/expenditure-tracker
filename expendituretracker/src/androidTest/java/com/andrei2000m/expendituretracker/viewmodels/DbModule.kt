@@ -5,12 +5,12 @@ import androidx.room.Room
 import com.andrei2000m.expendituretracker.sql.ExpenditureDb
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 
 @Module
-@TestInstallIn(components = [ActivityComponent::class], replaces = [DbModule::class])
+@TestInstallIn(components = [SingletonComponent::class], replaces = [DbModule::class])
 object TestDbModule {
 
     @Provides

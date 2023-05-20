@@ -16,7 +16,7 @@ class CategoryViewModel constructor(
 ) : AndroidViewModel(application) {
 
     private val categoryDao = db.categoryDao()
-    val categories = categoryDao.getAll().map {
+    val categories = categoryDao.getAllLive().map {
         it.joinToString(separator = "\n")
     }
 

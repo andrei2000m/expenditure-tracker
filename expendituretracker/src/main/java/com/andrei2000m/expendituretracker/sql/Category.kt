@@ -24,5 +24,8 @@ interface CategoryDao {
     fun insertCategory(category: Category): Long
 
     @Query("SELECT * FROM categories")
-    fun getAll(): LiveData<List<Category>>
+    fun getAllLive(): LiveData<List<Category>>
+
+    @Query("SELECT * FROM categories")
+    fun getAll(): List<Category>
 }
