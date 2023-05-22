@@ -28,7 +28,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-internal class CategoryViewModelTest {
+internal class SubcategoryViewModelTest {
 
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
@@ -43,6 +43,8 @@ internal class CategoryViewModelTest {
     fun before() {
         hiltRule.inject()
     }
+
+    //TODO: Fix this
 
     @Test
     fun submitsCategoryOnButtonPress() {

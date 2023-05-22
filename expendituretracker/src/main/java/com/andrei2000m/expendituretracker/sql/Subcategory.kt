@@ -1,5 +1,6 @@
 package com.andrei2000m.expendituretracker.sql
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -29,6 +30,9 @@ data class Subcategory(
 interface SubcategoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSubcategory(subcategory: Subcategory): Long
+
+    @Query("SELECT * FROM subcategories")
+    fun getAllLive(): LiveData<List<Subcategory>>
 
     @Query("SELECT * FROM subcategories")
     fun getAll(): List<Subcategory>
